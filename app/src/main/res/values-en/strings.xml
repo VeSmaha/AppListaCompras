@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AppShoppingList</string>
+    <string name="adicionar_item">Add Item</string>
+    <string name="adicionar">Add</string>
+    <string name="lista_de_compras">Shopping List</string>
+    <string name="voltar">Return</string>
+    <string name="excluir" >Delete</string>
+    <string name="cancelar" >Cancel</string>
+    <string name="item_adicionado_com_sucesso">Item added successfully</string>
+    <string name="deseja_excluir">Do you want to delete?</string>
+    <string name="item_excluido_com_sucesso">Item deleted successfully!</string>
+</resources>

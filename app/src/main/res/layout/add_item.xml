@@ -1,4 +1,6 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -6,14 +8,51 @@
 
     <EditText
         android:id="@+id/itemEditText"
-        android:layout_width="381dp"
+        android:layout_width="257dp"
         android:layout_height="59dp"
-        android:hint="Adicionar item" />
+        android:layout_marginBottom="112dp"
+        android:hint="@string/adicionar_item"
+        app:layout_constraintBottom_toTopOf="@+id/addButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
         android:id="@+id/addButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Adicionar"
-        />
-</LinearLayout>
+        android:layout_width="151dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="185dp"
+        android:text="@string/adicionar"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemEditText" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="262dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="159dp"
+        android:layout_marginEnd="71dp"
+        android:layout_marginBottom="66dp"
+        android:text="@string/lista_de_compras"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/itemEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="151dp"
+        android:layout_height="63dp"
+
+        android:layout_marginEnd="129dp"
+        android:layout_marginBottom="61dp"
+        android:text="@string/voltar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

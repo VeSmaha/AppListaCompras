@@ -4,17 +4,29 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="193dp"
+        android:layout_height="39dp"
+        android:layout_gravity="center"
+        android:text="@string/lista_de_compras"
+        android:textSize="20dp" />
+
     <Button
         android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Adicionar Item"
+        android:text="@string/adicionar_item"
         />
+
+
 
     <ListView
         android:id="@+id/itemListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        />
+        >
+
+    </ListView>
 </LinearLayout>

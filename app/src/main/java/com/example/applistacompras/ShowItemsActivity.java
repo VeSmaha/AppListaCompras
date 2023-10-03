@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -48,65 +49,38 @@ public class ShowItemsActivity extends Activity {
             }
         });
 
-        itemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                itemListView.setItemChecked(position, !itemListView.isItemChecked(position));
-            }
-        });
-
         itemListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
                 final int itemPosition = position;
                 final String selectedItem = itemList.get(itemPosition);
 
-                // Crie um AlertDialog para escolher entre excluir ou editar
                 AlertDialog.Builder builder = new AlertDialog.Builder(ShowItemsActivity.this);
-                builder.setTitle("Escolha uma ação");
-                builder.setItems(new CharSequence[]{"Editar", "Excluir"}, new DialogInterface.OnClickListener() {
+                builder.setTitle(R.string.deseja_excluir);
+                builder.setPositiveButton(R.string.excluir, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
-                        switch (which) {
-                            case 0: // Editar
-                                Intent editItemIntent = new Intent(ShowItemsActivity.this, AddItemActivity.class);
-                                editItemIntent.putExtra("editItem", selectedItem); // Passa o item selecionado para edição
-                                startActivityForResult(editItemIntent, 2); // Usamos um requestCode diferente para a edição
-                                break;
+                        itemList.remove(itemPosition);
+                        adapter.notifyDataSetChanged();
+                        saveItemList(itemList); // Salve a lista atualizada
+                        showToast(getString(R.string.item_excluido_com_sucesso));
 
-                            case 1: // Excluir
-                                itemList.remove(itemPosition);
-                                adapter.notifyDataSetChanged();
-                                saveItemList(itemList); // Salve a lista atualizada
-                                break;
-                        }
                     }
                 });
+                builder.setNegativeButton(getString(R.string.cancelar), null);
                 builder.show();
 
                 return true;
             }
         });
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            String newItem = data.getStringExtra("newItem");
-            if (newItem != null) {
-                itemList.add(newItem);
-                adapter.notifyDataSetChanged();
-                saveItemList(itemList); // Salve a lista atualizada
-            }
-        }
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     private List<String> loadItemList() {
         String itemListJson = sharedPreferences.getString("itemList", "[]");
-        Type type = new TypeToken<List<String>>() {
-        }.getType();
+        Type type = new TypeToken<List<String>>() {}.getType();
         return new Gson().fromJson(itemListJson, type);
     }
 
@@ -117,3 +91,4 @@ public class ShowItemsActivity extends Activity {
         editor.apply();
     }
 }
+
