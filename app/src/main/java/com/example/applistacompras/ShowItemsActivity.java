@@ -1,5 +1,4 @@
 package com.example.applistacompras;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -12,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -49,15 +47,23 @@ public class ShowItemsActivity extends Activity {
             }
         });
 
+        itemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                itemListView.setItemChecked(position, !itemListView.isItemChecked(position));
+            }
+        });
+
         itemListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
                 final int itemPosition = position;
                 final String selectedItem = itemList.get(itemPosition);
 
+                // Crie um AlertDialog para escolher entre excluir ou editar
                 AlertDialog.Builder builder = new AlertDialog.Builder(ShowItemsActivity.this);
-                builder.setTitle(R.string.deseja_excluir);
-                builder.setPositiveButton(R.string.excluir, new DialogInterface.OnClickListener() {
+                builder.setTitle(getString(R.string.deseja_excluir));
+                builder.setPositiveButton(getString(R.string.excluir), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
                         itemList.remove(itemPosition);
@@ -74,8 +80,19 @@ public class ShowItemsActivity extends Activity {
             }
         });
     }
-    private void showToast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            String newItem = data.getStringExtra("newItem");
+            if (newItem != null) {
+                itemList.add(newItem);
+                adapter.notifyDataSetChanged();
+                saveItemList(itemList); // Salve a lista atualizada
+            }
+        }
     }
 
     private List<String> loadItemList() {
@@ -90,5 +107,12 @@ public class ShowItemsActivity extends Activity {
         editor.putString("itemList", itemListJson);
         editor.apply();
     }
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
 }
+
+
+
 
