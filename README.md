@@ -1,5 +1,5 @@
 # AppListaCompras
-## aplicativo que salca itens em um lista e tambem é possivel removelos, em Java usando o SharedPreferences.
+## aplicativo que salva itens em um lista e tambem é possivel removelos, em Java usando o SharedPreferences.
  
 ![Captura de tela 2023-10-03 211433](https://github.com/VeSmaha/AppListaCompras/assets/105559191/451dc219-6487-498f-834f-e1e35ec65d53)
 ![Captura de tela 2023-10-03 211400](https://github.com/VeSmaha/AppListaCompras/assets/105559191/3e62f002-efcd-4338-a5f5-4aec1ff1e0cd)
