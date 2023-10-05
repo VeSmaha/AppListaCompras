@@ -22,9 +22,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".AddItemActivity">
-            <!-- Se você deseja que esta atividade não seja iniciada diretamente, remova a intenção principal (MAIN) -->
-        </activity>
+<activity android:name=".AddItemActivity">
+
+</activity>
+
     </application>
 
 </manifest>
